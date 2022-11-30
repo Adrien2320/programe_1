@@ -1,0 +1,37 @@
+
+prof:
+1) qu'est ce qu'on stock??
+	des définitions DATA
+		user > login, password string
+		-identifiant > name, login, password + lien vers user
+		-coffre user <> ident		
+	
+	[user_login: [ident]]
+	(name, login, password)
+
+2) qu'est ce que le programme va faire??
+	Def fonction
+		creat utulisateur 
+			Verif utulisateur existant
+			creat coffre
+
+
+		log utilisateur > vérif du mots de passe
+			accès coffre 
+
+
+		log out
+		
+		supprimer utilisateur
+			supprimer coffre
+
+		DATA
+			creat DATA
+			delete DATA
+			update DATA
+			listing data (juste le nom)
+			read DATA (lire les données en détails d'une data)
+			Search DATA	 (sur le nom)
+
+	UI
+		menu
