@@ -59,6 +59,36 @@ def create_key() -> int:
     return key
 
 
+def get_value()-> tuple :
+    """demande a l'utilisateur un nom, login et un mot de passe. le return sous un tuple"""
+    # initiate show
+    print("ajout des données".center(100,"_"),
+          "\n")
+    # type and assign
+    name : str = input("Nom:")
+    login : str = input("speudo:")
+    password : str = input("Mot de passe:")
+
+    # return the values
+    return name,login,password
+
+
+
+def add_item_in_chest(key)->None:
+    """ajoute une valeur dans le coffre de l'utilisateur"""
+    # assign and type
+    name : str = get_value()[0]
+    login : str = get_value()[1]
+    password : str = get_value()[2]
+
+    # add the datas in dict_chest
+    dict_chest[key] = {name:(login,password)}
+    print("enregistrement réussi")
+    show_chest_menu(key)
+
+
+
+
 def show_chest_menu(key: int) -> None:
     """affiche le menu du coffre"""
     # type and assign
