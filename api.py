@@ -41,7 +41,7 @@ def resquest_name_and_passwords() -> tuple:
 def check_if_exist(name_and_password_user, dict_search: dict) -> bool:
     """Verify si le nom et le mot de passe exist déjà """
     # check if the user's answer exist in the dict_search
-    if name_and_password_user in dict_search:
+    if name_and_password_user in dict_search.keys():
         # the user's answer not exist in dict_search and return true
         return True
     else:
@@ -57,17 +57,6 @@ def create_key() -> int:
     while check_if_exist(key, dict_chest):
         key = random.randint(1, 1000)
     return key
-
-
-
-def add_item_in_chest(key:int)->None:
-    """ modifie(ajoute) une valeur dans le dictionnaire """
-    # type and assign
-    name_and_password : list = list(resquest_name_and_passwords())
-    # add a login and password  in a dict
-    dict_chest[key] =  name_and_password
-    # return on chest menu
-    show_chest_menu(key)
 
 
 def show_chest_menu(key: int) -> None:
