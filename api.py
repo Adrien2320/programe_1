@@ -77,14 +77,27 @@ def get_value()-> tuple :
 def add_item_in_chest(key)->None:
     """ajoute une valeur dans le coffre de l'utilisateur"""
     # assign and type
-    name : str = get_value()[0]
-    login : str = get_value()[1]
-    password : str = get_value()[2]
+    message : tuple = get_value()
+    name : str = message[0]
+    login : str = message[1]
+    password : str = message[2]
 
     # add the datas in dict_chest
     dict_chest[key] = {name:(login,password)}
     print("enregistrement réussi")
     show_chest_menu(key)
+
+
+def change_item_in_chest(key):
+    """change une donnée dans le dict_chest"""
+    # assign and type
+
+    # initiate show
+    print("modification des données".center(100,"_"),
+          "\n")
+    #
+    show_the_data_names()
+
 
 
 
@@ -206,6 +219,6 @@ def number_by_user() -> int:
 
 if __name__ == '__main__':
     # assign and type
-    dict_login: dict = {}
+    dict_login: dict = {('Adrien','1234'):999}
     dict_chest: dict = {}
     show_main_menu()
