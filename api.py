@@ -1,10 +1,5 @@
 import random
 
-# variable global
-dict_login: dict = {("Adrien", "1234"): 600}
-dict_chest: dict = {600: "Biére"}
-
-
 def get_chest_key(name_and_password_of_user: tuple) -> int:
     """cherche la clé de coffre lier au tuple name_and_password_of_user dans un dictionnaire"""
     # type and assign
@@ -64,14 +59,54 @@ def create_key() -> int:
     return key
 
 
+
+def add_item_in_chest(key:int)->None:
+    """ modifie(ajoute) une valeur dans le dictionnaire """
+    # type and assign
+    name_and_password : list = list(resquest_name_and_passwords())
+    # add a login and password  in a dict
+    dict_chest[key] =  name_and_password
+    # return on chest menu
+    show_chest_menu(key)
+
+
 def show_chest_menu(key: int) -> None:
-    pass
+    """affiche le menu du coffre"""
+    # type and assign
+
+    # initiate the chest menu
+    print("Coffre personnel".center(100,"_"),
+          "\n"
+          "\n 1.ajouter"
+          "\n 2.modifier"
+          "\n 3.supprimer"
+          "\n 4.chercher"
+          "\n"
+          "\n 0.revenir en arrière"
+          "\n")
+    # start the sub menu select by user
+    match number_by_user():
+        case 0:
+            show_main_menu()
+        case 1:
+            add_item_in_chest(key)
+        case 2:
+            change_item_in_chest(key)
+        case 3:
+            delete_item_in_chest(key)
+        case 4:
+            search_item_in_chest(key)
+        case _:
+            print("Le nombre entré n'est pas bon, veuillez entré un nombre compris entre 0 et 5.")
+            show_chest_menu()
+
 
 
 def show_create_new_user_menu() -> None:
     """ Affiche le menu creation utilisateur et le créer """
     # type and assign
     global dict_login
+    global dict_chest
     name_pass: tuple
     # initiate the create new user menu
     print("création nouvelle utilisateur".center(100, "_"),
@@ -89,6 +124,7 @@ def show_create_new_user_menu() -> None:
         # type and assign key, create the new user and start the chest menu
         key = create_key()
         dict_login = {name_pass: key}
+        dict_chest = {key : ""}
         show_chest_menu(key)
 
 
@@ -150,4 +186,7 @@ def number_by_user() -> int:
 
 
 if __name__ == '__main__':
+    # assign and type
+    dict_login: dict = {}
+    dict_chest: dict = {}
     show_main_menu()
