@@ -74,7 +74,7 @@ def get_value() -> tuple:
     return name, login, password
 
 
-def add_item_in_chest(key) -> None:
+def add_item_in_chest(key:int) -> None:
     """ajoute une valeur dans le coffre de l'utilisateur"""
     # assign and type
     global dict_vault
@@ -125,7 +125,7 @@ def delete_vault_data(list : list , num : int)->None:
     del dict_vault[key]
 
 
-def change_item_in_chest(key):
+def change_item_in_chest(key:int)-> None:
     """change une donnée dans le dict_chest"""
     # assign and type
     list_keys_vault = list(dict_vault.keys())
@@ -148,6 +148,24 @@ def change_item_in_chest(key):
     print("les modification ont été appliquer!")
     show_chest_menu(key)
 
+
+def delete_item_in_chest(key:int)->None:
+    """supprime une donné dans le dictionnaire (dict_vault)"""
+    # assign and type
+    list_keys_vault = list(dict_vault.keys())
+    num: int = len(list_keys_vault)
+    answer: tuple
+    # initiate show
+    print("menu pour supprimer une donné dans le coffre!".center(100,"_"))
+    # show list of keys of dict_vault
+    show_list_name(list_keys_vault, num)
+    # asks the user for a number
+    num = number_by_user() - 1
+    # delete data in dict_vault
+    delete_vault_data(list_keys_vault,num)
+    # shows that the change has been applied
+    print("la suppression a bien été appliquer!")
+    show_chest_menu(key)
 
 def show_chest_menu(key: int) -> None:
     """affiche le menu du coffre"""
