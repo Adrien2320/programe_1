@@ -1,5 +1,6 @@
 import random
 
+
 def get_chest_key(name_and_password_of_user: tuple) -> int:
     """cherche la clé de coffre lier au tuple name_and_password_of_user dans un dictionnaire"""
     # type and assign
@@ -59,47 +60,93 @@ def create_key() -> int:
     return key
 
 
-def get_value()-> tuple :
+def get_value() -> tuple:
     """demande a l'utilisateur un nom, login et un mot de passe. le return sous un tuple"""
     # initiate show
-    print("ajout des données".center(100,"_"),
+    print("ajout des données".center(100, "_"),
           "\n")
     # type and assign
-    name : str = input("Nom:")
-    login : str = input("speudo:")
-    password : str = input("Mot de passe:")
+    name: str = input("Nom:")
+    login: str = input("speudo:")
+    password: str = input("Mot de passe:")
 
     # return the values
-    return name,login,password
+    return name, login, password
 
 
-
-def add_item_in_chest(key)->None:
+def add_item_in_chest(key) -> None:
     """ajoute une valeur dans le coffre de l'utilisateur"""
     # assign and type
-    message : tuple = get_value()
-    name : str = message[0]
-    login : str = message[1]
-    password : str = message[2]
+    global dict_vault
+    message: tuple = get_value()
+    name: str = message[0]
+    login: str = message[1]
+    password: str = message[2]
 
     # add the datas in dict_chest
-    dict_chest[key] = {name:(login,password)}
+    dict_vault = {name: (login, password)}
     print("enregistrement réussi")
     show_chest_menu(key)
+
+
+def show_list_name(list: list, num: int) -> None:
+    """affiche la liste avec un nombre devant chaque valeurs"""
+    # assign and type
+    i: int = 0
+    position: int
+    # loop for show list with a number
+    for i in range(num):
+        position = i + 1
+        print(position, ".", list[i])
+
+
+def get_user_modify(num: int, list: list) -> tuple:
+    """demande de modifier les données afficher et renvoie un tuple de ses données(key,login,password)"""
+    # assign and type
+    key: str = list[num]
+    value_vault: tuple = dict_vault[key]
+    login: str = value_vault[0]
+    password: str = value_vault[1]
+    # initiate show modify menu
+    print("modification".center(100,"_"),
+          "\n se qui est entre paranthèse est la données actuel, si vous ne voulez pas modifier cette donné appuie "
+          "sur enter!")
+    key = input("nom ("+key+"):") or key
+    login = input("login ("+login+"):") or login
+    password = input("mot de passe ("+password+"):") or password
+    return key,login,password
+
+
+def delete_vault_data(list : list , num : int)->None:
+    """supprime la donné dans le dictionnaire (dict_vault)"""
+    # assign and type
+    key : str = list[num]
+    # delete data in dict_vault
+    del dict_vault[key]
 
 
 def change_item_in_chest(key):
     """change une donnée dans le dict_chest"""
     # assign and type
-
+    list_keys_vault = list(dict_vault.keys())
+    num: int = len(list_keys_vault)
+    answer: tuple
     # initiate show
-    print("modification des données".center(100,"_"),
+    print("modification des données".center(100, "_"),
           "\n")
-    #
-    show_the_data_names()
-
-
-
+    # show list of keys of dict_vault
+    show_list_name(list_keys_vault, num)
+    # asks the user for a number
+    num = number_by_user() - 1
+    # get the user change
+    answer = get_user_modify(num, list_keys_vault)
+    # delete data in dict_vault
+    delete_vault_data(list_keys_vault,num)
+    # add data in dict_vault
+    dict_vault[answer[0]] = answer[1], answer[2]
+    # shows that the change has been applied
+    print("les modification ont été appliquer!")
+    show_chest_menu(key)
 
 
 def show_chest_menu(key: int) -> None:
@@ -107,7 +154,7 @@ def show_chest_menu(key: int) -> None:
     # type and assign
 
     # initiate the chest menu
-    print("Coffre personnel".center(100,"_"),
+    print("Coffre personnel".center(100, "_"),
           "\n"
           "\n 1.ajouter"
           "\n 2.modifier"
@@ -130,8 +177,7 @@ def show_chest_menu(key: int) -> None:
             search_item_in_chest(key)
         case _:
             print("Le nombre entré n'est pas bon, veuillez entré un nombre compris entre 0 et 5.")
-            show_chest_menu()
-
+            show_chest_menu(key)
 
 
 def show_create_new_user_menu() -> None:
@@ -156,7 +202,7 @@ def show_create_new_user_menu() -> None:
         # type and assign key, create the new user and start the chest menu
         key = create_key()
         dict_login = {name_pass: key}
-        dict_chest = {key : ""}
+        dict_chest = {key: ""}
         show_chest_menu(key)
 
 
@@ -219,6 +265,7 @@ def number_by_user() -> int:
 
 if __name__ == '__main__':
     # assign and type
-    dict_login: dict = {('Adrien','1234'):999}
-    dict_chest: dict = {}
+    dict_vault: dict = {'Amazon': ('adri23', '0000')}
+    dict_login: dict = {('Adrien', '1234'): 999}
+    dict_chest: dict = {999: dict_vault}
     show_main_menu()
