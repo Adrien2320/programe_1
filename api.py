@@ -167,6 +167,7 @@ def delete_item_in_chest(key:int)->None:
     print("la suppression a bien été appliquer!")
     show_chest_menu(key)
 
+
 def show_chest_menu(key: int) -> None:
     """affiche le menu du coffre"""
     # type and assign
@@ -177,7 +178,6 @@ def show_chest_menu(key: int) -> None:
           "\n 1.ajouter"
           "\n 2.modifier"
           "\n 3.supprimer"
-          "\n 4.chercher"
           "\n"
           "\n 0.revenir en arrière"
           "\n")
@@ -191,8 +191,6 @@ def show_chest_menu(key: int) -> None:
             change_item_in_chest(key)
         case 3:
             delete_item_in_chest(key)
-        case 4:
-            search_item_in_chest(key)
         case _:
             print("Le nombre entré n'est pas bon, veuillez entré un nombre compris entre 0 et 5.")
             show_chest_menu(key)
