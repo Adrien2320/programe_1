@@ -217,7 +217,7 @@ def show_create_new_user_menu() -> None:
     else:
         # type and assign key, create the new user and start the chest menu
         key = create_key()
-        dict_login = {name_pass: key}
+        dict_login = {name_password: key}
         dict_chest = {key: ""}
         show_chest_menu(key)
 
