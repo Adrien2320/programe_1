@@ -1,4 +1,5 @@
 class Vault:
+    """simple vault class"""
     pass
 
 
